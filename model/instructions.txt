@@ -1,0 +1,1 @@
+Keep your model checkpoints/weights in this folder.

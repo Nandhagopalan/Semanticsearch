@@ -1,0 +1,3 @@
+Use data folder to keep your training, validation and test data.
+
+Cassava data files can be found from: https://www.kaggle.com/c/cassava-leaf-disease-classification/data

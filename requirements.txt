@@ -1,0 +1,9 @@
+-f https://download.pytorch.org/whl/torch_stable.html
+albumentations==0.5.2
+apex==0.9.10dev
+opencv-python==4.5.1.48
+pandas==1.2.3
+scikit_learn==0.24.1
+timm==0.4.5
+torch==1.8.1+cpu
+python-multipart==0.0.5
