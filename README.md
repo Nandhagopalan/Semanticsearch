@@ -1,4 +1,4 @@
-# Cassava leaf disease classification
+# Semantic search with FAISS
 [![PyPI version shields.io](https://img.shields.io/badge/pypi-0.0.2-blue)](https://pypi.org/project/cassava-classifier/)  [![Downloads](https://pepy.tech/badge/cassava-classifier)](https://pepy.tech/project/cassava-classifier)
 
 

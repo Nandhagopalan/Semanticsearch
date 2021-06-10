@@ -1,6 +1,5 @@
 from collections import namedtuple
 
-import cv2
 import numpy as np
 import torch
 from sentence_transformers import (
@@ -12,15 +11,22 @@ from sentence_transformers import (
     models,
     util,
 )
+import faiss
+import urllib
+import zipfile
+import os
 
 model = namedtuple("model", ["url", "model"])
 models = {
     "retrieve_rank": model(
-        url="https://github.com/Nandhagopalan/Semanticseach/releases/download/0.0.1/retrieve_rerank.zip",
+        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.1/retrieve_rerank.zip",
         model=SentenceTransformer,
+    ),
+    "faiss_index":model(
+        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.1/search.index.zip",
+        model=faiss
     )
 }
-
 
 def list_models():
     """
@@ -29,17 +35,29 @@ def list_models():
     return list(models.keys())
 
 
-def get_model(name):
+def get_model(embedder,faissix):
     """
     Load the pretrained weights and return search results
     Example:
     query = ''
     model: RetrieveRerank = get_model("retrieve_rank")
 
-    model.predit_as_json(query)
+    model.query_as_json(query)
     """
-    if not models.get(name):
+    if not models.get(embedder):
         raise Exception("Model name not found!")
 
-    model_class = models[name].model(models[name].url)
-    return model_class
+    model_class = models[embedder].model(models[embedder].url)
+    
+    ### check if file exist and dont download again
+    if not os.path.isfile('../model/search.index'):
+        urllib.request.urlretrieve(models[faissix].url, "search.index.zip")
+
+        with zipfile.ZipFile("search.index.zip", 'r') as zip_ref:
+            zip_ref.extractall('../model/')
+
+        os.remove("search.index.zip")
+
+    index=models[faissix].model.read_index('../model/search.index')
+    
+    return model_class,index

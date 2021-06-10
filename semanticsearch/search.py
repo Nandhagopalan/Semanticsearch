@@ -2,9 +2,12 @@
 """
 import time
 import numpy as np
+from semanticsearch import utils 
 
-def search(query,index,bi_encoder,cross_encoder):
-    print("Input question:", query)
+LOGGER = utils.init_logger()
+
+def search(query,index,bi_encoder,cross_encoder,passages):
+    LOGGER.info(f"Input question: {query}")
 
     ##### Sematic Search #####
     # Encode the query using the bi-encoder and find potentially relevant passages
@@ -13,7 +16,7 @@ def search(query,index,bi_encoder,cross_encoder):
     top_k = index.search(query_vector, 3)
     top_k_ids = top_k[1].tolist()[0]
     top_k_ids = list(np.unique(top_k_ids))
-    print('>>>> Results in Total Time: {}'.format(time.time()-t))
+    LOGGER.info('>>>> Results in Total Time: {}'.format(time.time()-t))
 
     ##### Re-Ranking #####
     # Now, score all retrieved passages with the cross_encoder
@@ -21,19 +24,20 @@ def search(query,index,bi_encoder,cross_encoder):
     cross_inp = [[query, passages[hit]] for hit in top_k_ids]
     bienc_op=[passages[hit] for hit in top_k_ids]
     cross_scores = cross_encoder.predict(cross_inp)
-    print('>>>> Results in Total Time: {}'.format(time.time()-t))
+    LOGGER.info('>>>> Results in Total Time: {}'.format(time.time()-t))
 
     # Output of top-5 hits from bi-encoder
-    print("\n-------------------------\n")
-    print("Top-3 Bi-Encoder Retrieval hits")
+    LOGGER.info("\n-------------------------\n")
+    LOGGER.info("Top-3 Bi-Encoder Retrieval hits")
     for result in bienc_op:
-        print("\t{}".format(result.replace("\n", " ")))
+        LOGGER.info("\t{}".format(result.replace("\n", " ")))
         
-#     for idx in range(len(cross_scores)):
-#         hits[idx]['cross-score'] = cross_scores[idx]
-    
     # Output of top-5 hits from re-ranker
-    print("\n-------------------------\n")
-    print("Top-3 Cross-Encoder Re-ranker hits")
+    LOGGER.info("\n-------------------------\n")
+    LOGGER.info("Top-3 Cross-Encoder Re-ranker hits")
+    rank=[]
     for hit in np.argsort(np.array(cross_scores))[::-1]:
-        print("\t{}".format(bienc_op[hit].replace("\n", " ")))
+        LOGGER.info("\t{}".format(bienc_op[hit].replace("\n", " ")))
+        rank.append(bienc_op[hit].replace("\n", " "))
+
+    return rank
