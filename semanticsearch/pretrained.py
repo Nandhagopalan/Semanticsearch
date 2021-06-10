@@ -3,15 +3,21 @@ from collections import namedtuple
 import cv2
 import numpy as np
 import torch
-from PIL import Image
-
-from cassava.model import CassavaClassifier
+from sentence_transformers import (
+    CrossEncoder,
+    InputExample,
+    SentenceTransformer,
+    datasets,
+    losses,
+    models,
+    util,
+)
 
 model = namedtuple("model", ["url", "model"])
 models = {
-    "tf_efficientnet_b4": model(
-        url="https://github.com/p-s-vishnu/cassava-leaf-disease-classification/releases/download/v0.1-efficientnet-b4/tf_efficientnet_b4_fold0.zip",  # noqa
-        model=CassavaClassifier,
+    "retrieve_rank": model(
+        url="https://github.com/Nandhagopalan/Semanticseach/releases/download/0.0.1/retrieve_rerank.zip",
+        model=SentenceTransformer,
     )
 }
 
@@ -25,17 +31,15 @@ def list_models():
 
 def get_model(name):
     """
-    Load the pretrained weights and return model
+    Load the pretrained weights and return search results
     Example:
-    image = Image.open(<image path>)
-    image = np.array(image)
-    model: CassavaClassifier = get_model("tf_efficientnet_b4")
+    query = ''
+    model: RetrieveRerank = get_model("retrieve_rank")
 
-    model.predit_as_json(image)
+    model.predit_as_json(query)
     """
     if not models.get(name):
         raise Exception("Model name not found!")
-    model_class = models[name].model(model_name=name)
-    state_dict = torch.hub.load_state_dict_from_url(models[name].url, map_location="cpu")
-    model_class.load_state_dict(state_dict)
+
+    model_class = models[name].model(models[name].url)
     return model_class

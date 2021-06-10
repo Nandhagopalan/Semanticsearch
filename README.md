@@ -1,10 +1,10 @@
 # Cassava leaf disease classification
-[![PyPI version shields.io](https://img.shields.io/badge/pypi-0.0.2-blue)](https://pypi.org/project/cassava-classifier/)  [![Downloads](https://pepy.tech/badge/cassava-classifier)](https://pepy.tech/project/cassava-classifier)  
+[![PyPI version shields.io](https://img.shields.io/badge/pypi-0.0.2-blue)](https://pypi.org/project/cassava-classifier/)  [![Downloads](https://pepy.tech/badge/cassava-classifier)](https://pepy.tech/project/cassava-classifier)
 
 
-The idea of this project is to build an image classifier to find out healthy and diseased cassava leaves.
+The idea of this project is to build a semantic search engine which can search across multiple research papers related to covid and return the response. This can pretty much help many ppl who want to know about ongoing research wrt covid
 
-There are 4 different classes of leaf diseases namely - `Cassava Bacterial Blight (CBB),Cassava Brown Streak Disease (CBSD),Cassava Green Mottle (CGM) and Cassava Mosaic Disease (CMD)`.
+We have used - `retrieval-ranking method with faiss index` for retrieving data for the query.
 
 
 ## Web app
@@ -20,7 +20,6 @@ There are 4 different classes of leaf diseases namely - `Cassava Bacterial Bligh
 ## Installation
 
 `pip install cassava-classifier`
-
 
 
 ## Inference example
@@ -49,9 +48,9 @@ Try out the inference code either on google colab or kaggle.
 [Github discussion forum](https://github.com/p-s-vishnu/cassava-leaf-disease-classification/discussins)
 
 
-## Blog
+## Kaggle
 
-[Medium link]
+[https://www.kaggle.com/nandhuelan/semantic-search]
 
 
 
@@ -61,7 +60,4 @@ We would like to thank Kaggle community as a whole for providing an avenue to le
 
 1. Vladimir Iglovikov for his wonderful article ["I trained a model. What is next?"](https://ternaus.blog/tutorial/2020/08/28/Trained-model-what-is-next.html)
 
-2. [Y. Nakama](https://www.kaggle.com/yasufuminakama) for the baseline code.
-
-
-<a href="https://www.buymeacoffee.com/vpkprasanna" target="_blank"><img src="https://github.com/appcraftstudio/buymeacoffee/raw/master/Images/snapshot-bmc-button.png" width="300"></a>
+2. [Xhululu](https://www.kaggle.com/xhlulu/cord-19-eda-parse-json-and-generate-clean-csv) for the dataset.
