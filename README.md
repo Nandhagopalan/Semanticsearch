@@ -2,7 +2,7 @@
 
 The idea of this project is to build a semantic search engine which can search across multiple research papers related to covid and return the response. This can pretty much help people who want to know about ongoing research with respect to covid'19
 
-We have used - `retrieval-ranking method with faiss index` for retrieving data for the query.
+I have used - `retrieval-ranking method with faiss index` for retrieving data for the query.
 
 
 ## Installation
@@ -50,7 +50,7 @@ Detailed walk through of the solution can be found in the below kaggle notebook
 
 ## Acknowledgements
 
-We would like to thank Kaggle community as a whole for providing an avenue to learn and discuss latest data science/machine learning advancements but a hat tip to whose code was used / who inspired us.
+I would like to thank Kaggle community as a whole for providing an avenue to learn and discuss latest data science/machine learning advancements but a hat tip to whose code was used / who inspired us.
 
 1. Vladimir Iglovikov for his wonderful article ["I trained a model. What is next?"](https://ternaus.blog/tutorial/2020/08/28/Trained-model-what-is-next.html)
 
