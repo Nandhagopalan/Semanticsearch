@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name="semantic_search_faiss",
-    version="0.0.9",
+    version="0.1.0",
     author="Nandhagopalan Elangovan",
     description="Semantic search to query covid related papers",
     long_description_content_type="text/markdown",

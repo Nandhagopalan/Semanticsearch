@@ -2,7 +2,7 @@
 
 The idea of this project is to build a semantic search engine which can search across multiple research papers related to covid and return the response. This can pretty much help people who want to know about ongoing research with respect to covid'19
 
-I have used - `retrieval-ranking method with faiss index` for retrieving data for the query.
+I have used - `retrieval-ranking method with faiss index` approach for the faster retrieval of data for the given query.
 
 
 ## Installation
