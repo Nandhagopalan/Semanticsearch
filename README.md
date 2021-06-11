@@ -29,13 +29,13 @@ results=search.search(query,index,bi_encoder,cross_encoder,documents)
 
 ```
 
-Synthetic query generation using T5
-Finetuning Bi-encoder using the synthetic query
-Index the data using finetuned BI-encoder
-Bi-encoder + Cross encoder with FAISS search
+1. Synthetic query generation using T5
+2. Finetuning Bi-encoder using the synthetic query
+3. Indexing the data with FAISS using finetuned BI-encoder
+4. Bi-encoder + Cross encoder with FAISS search
 
 ```
-Try out the code either on google colab.
+Try out the code on google colab.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1f4fm6RD08Llc15kG7q-wCt7YQUi-aAn7?usp=sharing)
 
@@ -50,7 +50,7 @@ Detailed walk through of the solution can be found in the below kaggle notebook
 
 ## Acknowledgements
 
-I would like to thank Kaggle community as a whole for providing an avenue to learn and discuss latest data science/machine learning advancements but a hat tip to whose code was used / who inspired us.
+I would like to thank Kaggle community as a whole for providing an avenue to learn and discuss latest data science/machine learning advancements.
 
 1. Vladimir Iglovikov for his wonderful article ["I trained a model. What is next?"](https://ternaus.blog/tutorial/2020/08/28/Trained-model-what-is-next.html)
 
