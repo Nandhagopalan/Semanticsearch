@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name="semantic_search_faiss",
-    version="0.0.2",
+    version="0.0.9",
     author="Nandhagopalan Elangovan",
     description="Semantic search to query covid related papers",
     long_description_content_type="text/markdown",
@@ -22,7 +22,7 @@ setup(
        "certifi==2021.5.30",
         "chardet==4.0.0",
         "click==8.0.1",
-        "dataclasses==0.8",
+        "dataclasses",
         "faiss-cpu==1.7.1",
         "filelock==3.0.12",
         "huggingface-hub==0.0.8",
@@ -65,5 +65,4 @@ setup(
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    cmdclass={"upload": UploadCommand},
 )

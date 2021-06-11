@@ -35,9 +35,13 @@ def search(query,index,bi_encoder,cross_encoder,passages):
     # Output of top-5 hits from re-ranker
     LOGGER.info("\n-------------------------\n")
     LOGGER.info("Top-3 Cross-Encoder Re-ranker hits")
-    rank=[]
+    results=[]
     for hit in np.argsort(np.array(cross_scores))[::-1]:
         LOGGER.info("\t{}".format(bienc_op[hit].replace("\n", " ")))
-        rank.append(bienc_op[hit].replace("\n", " "))
+        results.append(bienc_op[hit].replace("\n", " "))
 
-    return rank
+    json_resp={}
+    for rank,result in enumerate(results):
+        json_resp[f'rank_{rank+1}']=result
+
+    return json_resp

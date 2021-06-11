@@ -42,20 +42,12 @@ def main():
     except TypeError:
         print("TypeError: query should be a string")
 
-    bi_encoder,index=get_model(config.BI_ENCODER,config.INDEX)
+    bi_encoder,index,passages=get_model(config.BI_ENCODER,config.INDEX,config.DATA)
     cross_encoder = CrossEncoder(config.CROSS_ENCODER)
-    
-    if not os.path.isfile('data/covid_papers.csv'):
-        urllib.request.urlretrieve(config.DATA, "data/covid_papers.csv")
-
-    data=pd.read_csv('data/covid_papers.csv')
-    passages=data['abstract'].values.tolist()
 
     results=search.search(query,index,bi_encoder,cross_encoder,passages)
 
-    json_resp={}
-    for rank,result in enumerate(results):
-        json_resp[f'rank_{rank+1}']=result
+    
 
 
 if __name__ == "__main__":

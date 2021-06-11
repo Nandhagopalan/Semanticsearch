@@ -15,16 +15,21 @@ import faiss
 import urllib
 import zipfile
 import os
+import pandas as pd
 
 model = namedtuple("model", ["url", "model"])
 models = {
     "retrieve_rank": model(
-        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.1/retrieve_rerank.zip",
+        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.2/retrieve_rerank.zip",
         model=SentenceTransformer,
     ),
     "faiss_index":model(
-        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.1/search.index.zip",
+        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.2/search.index.zip",
         model=faiss
+    ),
+     "data":model(
+        url="https://github.com/Nandhagopalan/Semanticsearch/releases/download/0.0.2/covid_papers.csv",
+        model=pd
     )
 }
 
@@ -35,7 +40,7 @@ def list_models():
     return list(models.keys())
 
 
-def get_model(embedder,faissix):
+def get_model(embedder,faissix,data):
     """
     Load the pretrained weights and return search results
     Example:
@@ -51,6 +56,7 @@ def get_model(embedder,faissix):
     
     ### check if file exist and dont download again
     if not os.path.isfile('../model/search.index'):
+    
         urllib.request.urlretrieve(models[faissix].url, "search.index.zip")
 
         with zipfile.ZipFile("search.index.zip", 'r') as zip_ref:
@@ -58,6 +64,14 @@ def get_model(embedder,faissix):
 
         os.remove("search.index.zip")
 
+    if not os.path.isfile('covid_papers.csv'):
+        urllib.request.urlretrieve(models[data].url, "covid_papers.csv")
+
+    data=pd.read_csv('covid_papers.csv')
+    passages=data['abstract'].values.tolist()
+
+    os.remove("covid_papers.csv")
+
     index=models[faissix].model.read_index('../model/search.index')
     
-    return model_class,index
+    return model_class,index,passages
